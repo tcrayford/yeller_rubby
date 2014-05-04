@@ -1,0 +1,4 @@
+.bundle
+.ruby-version
+tmp
+pkg/
