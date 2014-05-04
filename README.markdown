@@ -146,7 +146,7 @@ config.error_handler = Yeller::LogErrorHandler.new(your_logger)
 
 `yeller_ruby` ships with two integrations out of the box: Rack and Rails:
 
-# Rack
+## Rack
 
 Because there isn't a decent way to pass a block into a rack middleware that you're using with `use` (in a way that doesn't look awful anyway), `Yeller::Rack` relies on a global instance of the yeller client. Configure it thusly:
 
@@ -164,14 +164,14 @@ use Yeller::Rack
 
 For a sinatra example, you can see `examples/sinatra.rb` in this repo
 
-# Rails
+## Rails
 
 The Rails plugin relies on the same global instance of the client that the rack one does, only it configures it in a slightly different way:
 
 ```ruby
-Yeller::Rail.configure do |config|
+Yeller::Rails.configure do |config|
   config.token = 'YOUR API KEY HERE'
 end
 ```
 
-This also sets up the error logger for yeller as the Rails logger (see above for more about error loggers), and hooks into Rails via a railtie so that exceptions are caught correctly.
+This also sets up the error logger for yeller as the Rails logger (see above for more about error loggers), and hooks into Rails via a railtie so that exceptions are caught correctly. Once you've done `Yeller::Rails.configure`, everything else should be automatic.
