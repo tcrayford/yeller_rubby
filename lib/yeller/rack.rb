@@ -30,8 +30,8 @@ module Yeller
         exception,
         :url => request.url,
         :custom_data => {
-        :params => request.params,
-        :session => env.fetch('rack.session', {}),
+          :params => request.params,
+          :session => env.fetch('rack.session', {}),
       })
     end
   end
