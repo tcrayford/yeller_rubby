@@ -6,21 +6,21 @@ running app.
 
 # Integration
 
-Note that `yeller_rubby` is a low-level client, and doesn't include
+Note that `yeller_ruby` is a low-level client, and doesn't include
 integrations with web frameworks, background job systems, etc.
 
 ## Adding to your project
 
-`yeller_rubby` is distributed via rubygems. If you use bundler, add it to your Gemfile:
+`yeller_ruby` is distributed via rubygems. If you use bundler, add it to your Gemfile:
 
 ```ruby
-gem "yeller_rubby"
+gem "yeller_ruby"
 ```
 
 Otherwise you can install it:
 
 ```bash
-gem install yeller_rubby
+gem install yeller_ruby
 ```
 
 ## Integrating
