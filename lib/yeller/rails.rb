@@ -29,11 +29,6 @@ module Yeller
         app.config.middleware.insert 0, "Yeller::Rack"
       end
 
-      initializer "yeller.action_controller" do
-        ActiveSupport.on_load :action_controller do
-        end
-      end
-
       config.after_initialize do
         if defined?(::ActionDispatch::DebugExceptions)
           ::ActionDispatch::DebugExceptions.send(:include, Yeller::Rails::ActionControllerCatchingHooks)
