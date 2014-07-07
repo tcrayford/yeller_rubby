@@ -19,7 +19,18 @@ module Yeller
 
       protected
       def render_exception_with_yeller(env, exception)
-        Yeller::Rack.rescue_rack_exception(exception, env)
+        controller = env['action_controller.instance']
+        params = controller.send(:params)
+        request = ::Rack::Request.new(env)
+        Yeller::Rack.report(
+          exception,
+          :url => request.url,
+          :location => "#{controller.class.to_s}##{params[:action]}",
+          :custom_data => {
+            :params => params,
+            :session => env.fetch('rack.session', {})
+          })
+
         render_exception_without_yeller(env, exception)
       end
     end
