@@ -6,6 +6,10 @@ describe Yeller::ExceptionFormatter do
     class CustomException < StandardError; end
   end
 
+  def identity_backtrace_filter
+    Yeller::ExceptionFormatter::IdentityBacktraceFilter.new
+  end
+
   it "it returns the right message" do
     error = RuntimeError.new('an_message')
     hash = Yeller::ExceptionFormatter.format(error)
@@ -53,14 +57,20 @@ describe Yeller::ExceptionFormatter do
 
   it "passes along custom data passed through the options" do
     error = RuntimeError.new
-    hash = Yeller::ExceptionFormatter.format(error, custom_data:  {params: {user_id: 1}})
+    hash = Yeller::ExceptionFormatter.format(
+      error,
+      identity_backtrace_filter,
+      custom_data:  {params: {user_id: 1}})
     hash[:"custom-data"].should == {:params => {:user_id => 1}}
   end
 
   describe "url" do
     it "passes along the url passed in the options hash" do
       error = RuntimeError.new
-      hash = Yeller::ExceptionFormatter.format(error, url: "http://example.com/foobar")
+      hash = Yeller::ExceptionFormatter.format(
+        error,
+        identity_backtrace_filter,
+        url: "http://example.com/foobar")
       hash[:url].should == "http://example.com/foobar"
     end
 
@@ -74,7 +84,10 @@ describe Yeller::ExceptionFormatter do
   describe "location" do
     it "passes along the location passed in the options hash" do
       error = RuntimeError.new
-      hash = Yeller::ExceptionFormatter.format(error, location: "ExampleController#show")
+      hash = Yeller::ExceptionFormatter.format(
+        error,
+        identity_backtrace_filter,
+        location: "ExampleController#show")
       hash[:location].should == "ExampleController#show"
     end
 

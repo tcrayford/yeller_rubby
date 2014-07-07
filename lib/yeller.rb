@@ -21,6 +21,7 @@ module Yeller
       config.servers,
       config.token,
       Yeller::StartupParams.defaults(config.startup_params),
+      Yeller::BacktraceFilter.new(config.backtrace_filters),
       config.error_handler
     )
   end
