@@ -1,6 +1,7 @@
 require 'net/http'
 require 'yajl/json_gem'
 
+require_relative 'yeller/backtrace_filter'
 require_relative 'yeller/client'
 require_relative 'yeller/configuration'
 require_relative 'yeller/exception_formatter'
