@@ -8,7 +8,7 @@ describe Yeller::StartupParams do
 
   it "hostname defaults to the current hostname" do
     Socket.should_receive(:gethostname).and_return('hostname')
-    Yeller::StartupParams.defaults.fetch(:hostname).should == 'hostname'
+    Yeller::StartupParams.defaults.fetch(:host).should == 'hostname'
   end
 
   describe "application environment" do
