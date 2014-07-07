@@ -2,6 +2,7 @@ require_relative 'server'
 
 module Yeller
   class Configuration
+    attr_reader :token, :servers, :startup_params, :error_handler
     DEFAULT_SERVERS = [
       Yeller::SecureServer.new("collector1.yellerapp.com", 443),
       Yeller::SecureServer.new("collector2.yellerapp.com", 443),
@@ -40,22 +41,6 @@ module Yeller
 
     def token=(token)
       @token = token
-    end
-
-    def token
-      @token
-    end
-
-    def servers
-      @servers
-    end
-
-    def startup_params
-      @startup_params
-    end
-
-    def error_handler
-      @error_handler
     end
 
     def error_handler=(new_error_handler)
