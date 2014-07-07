@@ -33,6 +33,11 @@ module Yeller
 
     def backtrace_filters
       filters = []
+      if defined?(Gem)
+        Gem.path.each do |gem_path|
+          filters << [gem_path, 'GEM_ROOT']
+        end
+      end
       filters << [project_root, 'PROJECT_ROOT']
       filters
     end
