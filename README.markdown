@@ -105,6 +105,13 @@ yeller_client = Yeller.client do |client|
   # and yellerapp.com's servers don't support http, for
   # security reasons. Mostly just used for testing.
   client.add_insecure_server 'example.com', 80
+
+  # to add a 'development environment'
+  # exceptions aren't reported in development environments
+  client.development_environments << 'staging'
+
+  # to override the default development environments
+  client.development_environments = ['test']
 end
 ```
 
