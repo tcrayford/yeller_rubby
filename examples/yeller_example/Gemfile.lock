@@ -103,7 +103,7 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     yajl-ruby (1.2.0)
-    yeller_ruby (0.0.1)
+    yeller_ruby (0.0.3)
       yajl-ruby (= 1.2.0)
 
 PLATFORMS

@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = "yeller_ruby"
-  spec.version       = "0.0.2"
+  spec.version       = "0.0.3"
   spec.authors       = ["Tom Crayford"]
   spec.email         = ["tcrayford@googlemail.com"]
   spec.summary       = %q{A Ruby/Rack/Rails client for yellerapp.com}
