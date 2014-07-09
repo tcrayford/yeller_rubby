@@ -68,4 +68,18 @@ describe "Yeller API client" do
       yeller_api.should have_received_deploy('3abc352')
     end
   end
+
+  it "ignores exceptions in development environments" do
+    FakeYellerApi.start('token', 8893) do |yeller_api|
+      yeller = Yeller.client do |client|
+        client.token = 'token'
+        client.remove_default_servers
+        client.add_insecure_server "localhost", 8893
+        client.environment = 'development'
+      end
+      exception = raise_exception(CustomException, "an_message")
+      yeller.report(exception)
+      yeller_api.should_not have_received_exception(exception)
+    end
+  end
 end

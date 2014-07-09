@@ -2,7 +2,7 @@ require_relative 'server'
 
 module Yeller
   class Configuration
-    attr_reader :token, :servers, :startup_params, :error_handler, :project_root
+    attr_reader :token, :servers, :startup_params, :error_handler, :project_root, :development_environments
     DEFAULT_SERVERS = [
       Yeller::SecureServer.new("collector1.yellerapp.com", 443),
       Yeller::SecureServer.new("collector2.yellerapp.com", 443),
@@ -15,6 +15,7 @@ module Yeller
       @servers = DEFAULT_SERVERS
       @startup_params = {}
       @error_handler = Yeller::LogErrorHandler.new
+      @development_environments = Set.new(['development', 'test'])
     end
 
     def remove_default_servers
@@ -65,6 +66,15 @@ module Yeller
       else
         Dir.pwd
       end
+    end
+
+    def development_environments=(new_development_environments)
+      @development_environments = new_development_environments
+    end
+
+    def ignore_exceptions?
+      development_environments.include?(
+        @startup_params[:"application-environment"])
     end
 
     def token=(token)

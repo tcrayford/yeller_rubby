@@ -3,6 +3,7 @@ require 'yajl/json_gem'
 
 require_relative 'yeller/backtrace_filter'
 require_relative 'yeller/client'
+require_relative 'yeller/ignoring_client'
 require_relative 'yeller/configuration'
 require_relative 'yeller/exception_formatter'
 require_relative 'yeller/server'
@@ -18,12 +19,16 @@ module Yeller
   end
 
   def self.build_client(config)
-    Yeller::Client.new(
-      config.servers,
-      config.token,
-      Yeller::StartupParams.defaults(config.startup_params),
-      Yeller::BacktraceFilter.new(config.backtrace_filters),
-      config.error_handler
-    )
+    if config.ignore_exceptions?
+      Yeller::IgnoringClient.new
+    else
+      Yeller::Client.new(
+        config.servers,
+        config.token,
+        Yeller::StartupParams.defaults(config.startup_params),
+        Yeller::BacktraceFilter.new(config.backtrace_filters),
+        config.error_handler
+      )
+    end
   end
 end
